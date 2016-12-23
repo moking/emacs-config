@@ -168,11 +168,23 @@
                         :type ("u8" type (:type "class") nil nil))
                         (reparse-symbol arg-sub-list) [3792 3803]))                  
                 :type "int")
-                nil [3741 4216]))          
+                nil [3741 4216])
+            ("ssd_size" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("ssd" variable
+                       (:pointer 1
+                        :type ("ssd_dev" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4238 4258]))                  
+                :type ("u32" type (:type "class") nil nil))
+                nil [4218 4300]))          
       :file "ssd_interface.h"
-      :pointmax 4225
-      :fsize 4224
-      :lastmodtime '(22618 58842 157932 463000)
+      :pointmax 4309
+      :fsize 4308
+      :lastmodtime '(22619 25874 605752 330000)
       :unmatched-syntax nil
       :lexical-table 
         '(("_GNU_SOURCE")
@@ -10547,7 +10559,7 @@
       :file "util.c"
       :pointmax 146058
       :fsize 146057
-      :lastmodtime '(22618 4236 557719 905000)
+      :lastmodtime '(22619 25724 347241 541000)
       :unmatched-syntax '((string 128595 . 128604) (number 128592 . 128593) (punctuation 128590 . 128591) (punctuation 128589 . 128590) (semantic-list 128554 . 128588) (string 128424 . 128441) (number 128419 . 128422) (punctuation 128417 . 128418) (punctuation 128416 . 128417) (semantic-list 128393 . 128415) (SIZEOF 128387 . 128393) (string 115703 . 115726) (semantic-list "((UINT64_C(4096)))" 115697 . 115701) (punctuation 115695 . 115696) (semantic-list 115679 . 115694) (SIZEOF 115673 . 115679) (symbol 38037 . 38045) (STATIC 38030 . 38036) (semantic-list 15645 . 15653) (semantic-list 15628 . 15644) (semantic-list 15310 . 15318) (semantic-list 15302 . 15309) (semantic-list 13973 . 13981) (semantic-list 13965 . 13972))
       :lexical-table 
         '(("RGEN_ASYNC_BUFFER_NR" . ((semantic-list "((UINT64_C(4)))" 36668 . 36683)))
@@ -10606,18 +10618,18 @@
                 nil [166 193])
             ("main" function
                (:arguments 
-                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [5476 5485])
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [5503 5512])
                     ("argv" variable
                        (:pointer 1
                         :dereference 1
                         :type "char")
-                        (reparse-symbol arg-sub-list) [5486 5499]))                  
+                        (reparse-symbol arg-sub-list) [5513 5526]))                  
                 :type "int")
-                nil [5467 5816]))          
+                nil [5494 5967]))          
       :file "main.c"
-      :pointmax 5817
-      :fsize 5816
-      :lastmodtime '(22618 55726 369130 334000)
+      :pointmax 5968
+      :fsize 5967
+      :lastmodtime '(22620 53004 219446 676000)
       :unmatched-syntax nil)
     (semanticdb-table "main-micro.c"
       :major-mode 'c-mode
@@ -11151,58 +11163,273 @@
                       :type "enum")
                       nil nil)
                 :type "typedef")
-                nil [565 632]))          
+                nil [565 632])
+            ("lbn_list" type
+               (:members 
+                  ( ("fp" variable (:type ("FingerPrint" type (:type "class") nil nil)) (reparse-symbol classsubparts) [652 667])
+                    ("max_num" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [669 681])
+                    ("num" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [683 691])
+                    ("lbns" variable
+                       (:dereference 1
+                        :type ("u32" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [693 704]))                  
+                :type "struct")
+                nil [634 707])
+            ("Empty_Item" variable (:constant-flag t) nil [717 727])
+            ("create_lbn_list" function
+               (:pointer 1
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("fp" variable
+                       (:pointer 1
+                        :type ("FingerPrint" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [781 797])
+                    ("max_num" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [798 810])
+                    ("lbn" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [811 819]))                  
+                :type ("lbn_list" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [741 1114]))          
       :file "type.h"
-      :pointmax 641
-      :fsize 640
-      :lastmodtime '(22618 61290 896280 220000)
-      :unmatched-syntax '((TYPEDEF 565 . 572))
+      :pointmax 1122
+      :fsize 1121
+      :lastmodtime '(22619 26072 365052 550000)
+      :unmatched-syntax nil
       :lexical-table 
         '(("TYPE_H_H_H")
+          ("Empty_Item" . ((semantic-list "((u32)(-1))" 728 . 739)))
           )
 )
     (semanticdb-table "dedup_worker.c"
       :major-mode 'c-mode
       :tags 
-        '( ("util.h" include nil nil [2 19])
-            ("type.h" include nil nil [20 37])
+        '( ("ssd_interface.h" include nil nil [2 28])
+            ("type.h" include nil nil [29 46])
+            ("fingerprint.h" include nil nil [47 71])
+            ("dedup_worker" type
+               (:prototype t
+                :type "struct")
+                nil [73 93])
+            ("Addr" type
+               (:typedef ("u32" type (:type "class") nil nil)
+                :type "typedef")
+                nil [95 112])
             ("op_func" function
                (:prototype-flag t
                 :function-pointer t
                 :arguments 
-                  ( ("lbn" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [63 71])
+                  ( ("worker" variable
+                       (:pointer 1
+                        :type ("dedup_worker" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [137 165])
+                    ("lbn" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [166 174])
                     ("buf" variable
                        (:pointer 1
                         :type ("u8" type (:type "class") nil nil))
-                        (reparse-symbol arg-sub-list) [72 80])
-                    ("num_page" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [81 94])
-                    ("op" variable (:type ("op_type" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [95 106]))                  
+                        (reparse-symbol arg-sub-list) [175 183])
+                    ("num_page" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [184 197])
+                    ("op" variable (:type ("op_type" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [198 209]))                  
                 :type "int")
-                nil [48 107])
+                nil [122 210])
             ("dedup_worker" type
                (:members 
-                  ( ("lbn2FP" variable
+                  ( ("segment_size" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [235 252])
+                    ("segment_bm" variable
+                       (:pointer 1
+                        :type ("bitmap" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [285 312])
+                    ("lbn2FP" variable
                        (:pointer 1
                         :type ("cuckoo" type
                              (:prototype t
                               :type "struct")
                               nil nil))
-                        (reparse-symbol classsubparts) [131 153])
+                        (reparse-symbol classsubparts) [315 337])
                     ("FP2lbn" variable
                        (:pointer 1
                         :type ("cuckoo" type
                              (:prototype t
                               :type "struct")
                               nil nil))
-                        (reparse-symbol classsubparts) [212 234])
-                    ("procss_io" variable (:type ("op_func" type (:type "class") nil nil)) (reparse-symbol classsubparts) [291 309]))                  
+                        (reparse-symbol classsubparts) [396 418])
+                    ("process_io" variable (:type ("op_func" type (:type "class") nil nil)) (reparse-symbol classsubparts) [475 494])
+                    ("dev" variable
+                       (:pointer 1
+                        :type ("ssd_dev" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [497 517])
+                    ("lbn2FP_kv" variable
+                       (:pointer 1
+                        :type ("kv" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [520 541])
+                    ("FP2lbn_kv" variable
+                       (:pointer 1
+                        :type ("kv" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [544 565]))                  
                 :type "struct")
-                nil [108 312]))          
+                nil [212 568])
+            ("lbn_already_exists" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("list" variable
+                       (:pointer 1
+                        :type ("lbn_list" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [602 624])
+                    ("lbn" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [625 633]))                  
+                :type "bool")
+                nil [571 743])
+            ("append_lbn_list" function
+               (:pointer 1
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("list" variable
+                       (:pointer 1
+                        :type ("lbn_list" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [860 882])
+                    ("lbn" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [883 891]))                  
+                :type ("lbn_list" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [820 1519])
+            ("remove_from_lbn_list" function
+               (:pointer 1
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("list" variable
+                       (:pointer 1
+                        :type ("lbn_list" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1566 1588])
+                    ("lbn" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1589 1597]))                  
+                :type ("lbn_list" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [1521 1764])
+            ("handle_write" function
+               (:arguments 
+                  ( ("worker" variable
+                       (:pointer 1
+                        :type ("dedup_worker" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1783 1811])
+                    ("lbn" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1812 1820])
+                    ("num_page" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1821 1834])
+                    ("from_buf" variable
+                       (:pointer 1
+                        :type ("u8" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1835 1848]))                  
+                :type "int")
+                nil [1766 5065])
+            ("handle_read" function
+               (:arguments 
+                  ( ("worker" variable
+                       (:pointer 1
+                        :type ("dedup_worker" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [5083 5111])
+                    ("lbn" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5112 5120])
+                    ("num_page" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5121 5134])
+                    ("to_buf" variable
+                       (:pointer 1
+                        :type ("u8" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [5135 5146]))                  
+                :type "int")
+                nil [5067 5219])
+            ("handle_flush" function
+               (:arguments 
+                  ( ("worker" variable
+                       (:pointer 1
+                        :type ("dedup_worker" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [5238 5266]))                  
+                :type "int")
+                nil [5221 5297])
+            ("process_io_request" function
+               (:arguments 
+                  ( ("worker" variable
+                       (:pointer 1
+                        :type ("dedup_worker" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [5322 5350])
+                    ("lbn" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5351 5359])
+                    ("buf" variable
+                       (:pointer 1
+                        :type ("u8" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [5360 5368])
+                    ("num_page" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5369 5382])
+                    ("op" variable (:type ("op_type" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5383 5394]))                  
+                :type "int")
+                nil [5299 5674])
+            ("create_dedup_worker" function
+               (:pointer 1
+                :arguments 
+                  ( ("path" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [5717 5728])
+                    ("seg_size" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5729 5742]))                  
+                :type ("dedup_worker" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [5676 6507])
+            ("destropy_dedup_worker" function
+               (:arguments 
+                  ( ("worker" variable
+                       (:pointer 1
+                        :type ("dedup_worker" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6535 6563]))                  
+                :type "int")
+                nil [6509 6819]))          
       :file "dedup_worker.c"
-      :pointmax 341
-      :fsize 340
-      :lastmodtime '(22618 61640 790486 157000)
-      :unmatched-syntax '((close-paren 339 . 340) (symbol 318 . 337) (INT 314 . 317) (TYPEDEF 40 . 47) (semantic-list 337 . 343) (symbol 318 . 337) (INT 314 . 317) (TYPEDEF 40 . 47))))
+      :pointmax 6820
+      :fsize 6819
+      :lastmodtime '(22620 52857 200739 907000)
+      :unmatched-syntax nil)
+    (semanticdb-table "dedup_worker.h"
+      :major-mode 'c-mode
+      :tags nil
+      :file "dedup_worker.h"
+      :pointmax 228
+      :fsize 227
+      :lastmodtime '(22620 52069 598268 966000)
+      :unmatched-syntax nil))
   :file "!home!nifan!git!mcopy-dedup!semantic.cache"
   :semantic-tag-version "2.0"
   :semanticdb-version "2.2")

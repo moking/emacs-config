@@ -36,6 +36,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(cscope-close-window-after-select t)
  '(ecb-options-version "2.50")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
  '(ecb-source-path
@@ -44,9 +45,14 @@
         (help-echo "Mouse-2 toggles maximizing, mouse-3 displays a popup-menu"))
       "mcopy-dedup"))))
  '(ecb-tip-of-the-day nil)
+ '(ecb-windows-width 0.15)
+ '(global-auto-complete-mode t)
+ '(global-dummyparens-mode t)
+ '(menu-bar-mode t)
  '(package-selected-packages
    (quote
     (zygospore helm-gtags helm yasnippet ws-butler volatile-highlights use-package undo-tree iedit dtrt-indent counsel-projectile company clean-aindent-mode anzu)))
+ '(recentf-mode t)
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -108,3 +114,38 @@
 (define-key evil-normal-state-map "wl" 'windmove-right)
 (define-key evil-normal-state-map "wh" 'windmove-left)
 (define-key evil-normal-state-map "ww" 'ace-window)
+(define-key evil-normal-state-map (kbd "]") 'cscope-find-global-definition-no-prompting)
+(define-key evil-normal-state-map (kbd "[") 'cscope-pop-mark)
+(define-key evil-insert-state-map (kbd "<f1>") 'save_and_normal)
+
+(setq hippie-expand-try-functions-list
+      '(try-expand-dabbrev
+    try-expand-dabbrev-visible
+    try-expand-dabbrev-all-buffers
+    try-expand-dabbrev-from-kill
+    try-complete-file-name-partially
+    try-complete-file-name
+    try-expand-all-abbrevs
+    try-expand-list
+    try-expand-line
+    try-complete-lisp-symbol-partially
+    try-complete-lisp-symbol))
+
+(global-set-key (kbd "<s-tab>") 'hippie-expand)
+
+(color-theme-initialize)
+(color-theme-classic)
+
+(add-to-list 'load-path (expand-file-name "~/elisp"))
+(require 'auto-complete-exuberant-ctags)
+(ac-exuberant-ctags-setup)
+
+(require 'autopair)
+;; (autopair-global-mode) ;; to enable in all buffers
+
+;(add-hook 'c-mode-common-hook #'(lambda () (autopair-mode)))
+
+(add-to-list 'load-path
+             "~/.emacs.d/elpa/yasnippet")
+(require 'yasnippet)
+(yas-global-mode 1)

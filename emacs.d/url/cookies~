@@ -1,0 +1,30 @@
+;; Emacs-W3 HTTP cookies file
+;; Automatically generated file!!! DO NOT EDIT!!!
+
+(setq url-cookie-storage
+ '((".google.com"
+  [url-cookie "NID" "511=PNFk7IOeSGpkIu8Ch3_jIsvTlsff0BjoGfm4K5d-OYJ5PYMnsatr6YLRRpqLb01VmgxZmGiVAFTMMl1tP2xr_H86wvVJNZh29rxpgzrFkYZtZLSjOxfSoeZPu0bdoVRIUhaBNihfMR5DLTYlsWyn1wB6PzQqLBxP5YkkKMQibIs" "Fri, 05-Jul-2024 19:02:10 GMT" "/" ".google.com" nil])
+ (".ibm.com"
+  [url-cookie "bm_sz" "A24301BDA771BD4EE6FE5D6559709D3B~YAAQkpTYFzbW/XKMAQAAxK7f1RY4GNcn903gmpL7U5kT+YhRQjVCjrxwQ6cTKzLOsmKnpTPGTxaRLOQLiyUsiyUXGBoiEPpcenVLcB5XND2ny/9wguWr88X28CfOAyqfxz5MTsDKTo436H8nZc2eUAC7FzimuDqnJKU5ASshUl218d41CAcHUf1lRMME0bRzAXrTX+QbTr61SqXpxs1OH4evOtGpim5GfH3CEuxqkdaKaSBPrt8WnJdEO1dpY0LvbjJZqWvCgwT0fLKD4QdwTu38A05WSTC3guq3a3VON6k=~3750193~4600377" "Thu Jan 04 23:07:34 2024 GMT" "/" ".ibm.com" nil]))
+)
+(setq url-cookie-secure-storage
+ '((".google.com"
+  [url-cookie "AEC" "Ae3NU9OsWl1d1vv4ugxjicr0vJuP4v1XpsGJqSatuf14dNU3-PxLWsA5zPM" "Tue, 02-Jul-2024 22:49:44 GMT" "/" ".google.com" t]
+  [url-cookie "1P_JAR" "2024-01-04-22" "Sat, 03-Feb-2024 22:49:44 GMT" "/" ".google.com" t])
+ ("lwn.net"
+  [url-cookie "sub_nag" "Support LWN.net" "Sat, 06-Jan-2024 00:00:00 GMT" "/" "lwn.net" t])
+ (".ibm.com"
+  [url-cookie "_abck" "548E2D16FBEBB12BC80D3504E051C6B0~-1~YAAQkpTYFzTW/XKMAQAAxK7f1Qu+h1J3Nobuh18vWVGpECgwVtHWH2DHPIl6qWvjaFXr4p8QS8feFhK5oYod2GASgWNHWMpNVDHv2Gs4KPdReMJEHrueN/5GBOkWE1iWiUfptl5Zke8m2gCFTurz4CRwC8PaJZMcfgesHum+OfOpWFquQv7WTErKiJqoKLJ3bF2l1WwVNZMU2+FBV/npVxdJ6plXstHvAdkSu8jR1w3YdLTgWj8dMGyiI1KNKlQFYxcdQRCGNBwmjyi5c5Zmlqs7/8PuCCzLaZn5LtN0LzpT/FAY5bb4ogTfREP+fg804/33BBRyZV5VbNRcN1tn//ma7EIGQBPOV32kZyGvU8/6W/nmKbA=~-1~-1~-1" "Fri Jan 03 19:07:35 2025 GMT" "/" ".ibm.com" t])
+ (".stackoverflow.com"
+  [url-cookie "prov" "a94b4509-66db-4874-9335-3300018ff42f" "Sat, 04 Jan 2025 22:07:20 GMT" "/" ".stackoverflow.com" t])
+ ("accounts.google.com"
+  [url-cookie "__Host-GAPS" "1:bhMtzkaVdYC6RPL8QU539xDqjURw2A:5LlWY7ZkDS31jEfQ" "Sat, 03-Jan-2026 19:02:31 GMT" "/" "accounts.google.com" t]))
+)
+
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; coding: utf-8-emacs-unix
+;; End:
+
+;;; cookies ends here

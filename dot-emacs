@@ -1,0 +1,194 @@
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+
+(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0")
+(require 'color-theme)
+(eval-after-load "color-theme"
+  '(progn
+     (color-theme-initialize)
+     (color-theme-aalto-light)))
+
+(setq scroll-conservatively 101)
+
+
+
+(setq warning-minimum-level :emergency)
+(setq byte-compile-warnings nil)
+
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+(setq recentf-max-saved-items 25)
+
+(global-set-key (kbd "M-x") 'helm-M-x)
+
+(require 'company)
+(with-eval-after-load 'company
+  (company-ctags-auto-setup))
+
+
+(cscope-minor-mode 1)
+(helm-cscope-mode 1)
+(global-company-mode 1)
+
+(add-hook 'c-mode-common-hook 'company-mode)
+(add-hook 'c-mode-common-hook 'cscope-minor-mode)
+(add-hook 'c-mode-common-hook 'helm-cscope-mode)
+(add-hook 'c-mode-common-hook 'which-function-mode)
+(add-hook 'c-mode-common-hook 'hs-minor-mode)
+(add-hook 'after-init-hook 'global-company-mode)
+
+(setq tabbar-buffer-groups-function
+	  (lambda ()
+		(list "All")))
+
+(add-to-list 'load-path "~/.emacs.d/evil")
+(require 'evil)
+(evil-mode 1)
+(tabbar-mode 1)
+(tool-bar-mode 0)
+(auto-fill-mode 1)
+(scroll-bar-mode 0)
+
+(defun open-terminal ()
+  (interactive)
+  (vterm-toggle)
+  (switch-to-buffer "*vterm*")
+  (evil-insert-state)
+  (delete-other-windows-vertically)
+  )
+
+(global-set-key (kbd "<C-up>") 'shrink-window)
+(global-set-key (kbd "<C-down>") 'enlarge-window)
+(global-set-key (kbd "<C-left>") 'shrink-window-horizontally)
+(global-set-key (kbd "<C-right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-x t") 'open-terminal)
+
+
+(defun save-buffer-to-normal ()
+  (interactive)
+  (save-buffer)
+  (evil-normal-state))
+(define-key evil-normal-state-map (kbd "<f2>") 'save-buffer)
+(define-key evil-insert-state-map (kbd "<f2>") 'save-buffer-to-normal)
+(define-key evil-normal-state-map "fg" 'cscope-find-global-definition)
+(define-key evil-normal-state-map "fs" 'cscope-find-this-symbol)
+(define-key evil-normal-state-map "ft" 'cscope-find-this-text-string)
+(define-key evil-normal-state-map "fc" 'cscope-find-functions-calling-this-function)
+(define-key evil-normal-state-map "fb" 'cscope-pop-mark)
+(define-key evil-normal-state-map "q" 'kill-current-buffer)
+(define-key evil-normal-state-map "ww" 'ace-window)
+(define-key evil-normal-state-map (kbd "<f1>") 'markdown-preview)
+(define-key evil-normal-state-map "za" 'hs-hide-all)
+(define-key evil-normal-state-map "zb" 'hs-hide-block)
+(define-key evil-normal-state-map (kbd "<f4>") 'display-line-numbers-mode)
+(define-key evil-normal-state-map (kbd "<f5>") 'sr-speedbar-toggle)
+
+(setq-default
+ whitespace-line-column 80
+ whitespace-style       '(face lines-tail))
+
+(define-minor-mode sticky-mode
+"Make the current window always display this buffer."
+nil " st" nil
+(set-window-dedicated-p (selected-window) sticky-mode))
+(global-set-key [f11] 'sticky-mode)
+
+(global-set-key (kbd "C-x f") 'recentf-open-files)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (use-package markdown-mode			    ;;
+;;   :ensure t					    ;;
+;;   :mode ("README\\.md\\'" . gfm-mode)	    ;;
+;;   :init (setq markdown-command "multimarkdown")) ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(case-fold-search nil)
+ ;; '(cscope-close-window-after-select t)
+ '(initial-buffer-choice 'recentf-open-files)
+ '(package-selected-packages
+   '(comment-dwim-2 sr-speedbar ethan-wspace color-theme-approximate multi-vterm vterm-toggle company-ctags session pod-mode org-drill org notmuch muttrc-mode mutt-alias mu4e initsplit htmlize helm-org graphviz-dot-mode folding eproject diminish csv-mode color-theme-modern browse-kill-ring boxquote bm bar-cursor apache-mode tabbar recently markdown-preview-mode helm-fuzzy-find helm-cscope helm-company eyebrowse evil ace-window))
+ '(ring-bell-function 'ignore)
+ '(speedbar-default-position 'left)
+ '(tab-width 4)
+ '(tool-bar-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Lucida Console" :foundry "B&H " :slant normal :weight regular :height 113 :width semi-condensed)))))
+
+(defun sb/expand-tags ()
+
+  "Expand current `sr-speedbar' buffer file."
+  (interactive)
+  ;; We assume that the speedbar name is the same as the file of the buffer
+  (let* ((current-buffer-name (file-name-nondirectory (buffer-file-name)))
+     (file-point nil)
+     (line-list '()))
+    (with-current-buffer speedbar-buffer
+      ;; Refresh the current speedbar buffer
+      (speedbar-refresh)
+      (goto-char (point-min))
+      (re-search-forward current-buffer-name)
+      (setq file-point (point))
+      ;; This function make the point go backwards so we have to save the location
+      (speedbar-flush-expand-line)
+      (goto-char file-point)
+      ;; We enter the "expanded" attributes
+      (forward-line)
+      (while 
+      ;; Check if we reach another file, or the end of the buffer.
+      (and (not (speedbar-line-file))
+           (not (equal (point) (point-max))))
+    (push (point) line-list)
+    (forward-line))
+      ;; Once we have the point of the main branches, we iterate
+      ;; and expand his content
+      (seq-map (lambda (line)
+         (goto-char line)
+         (speedbar-flush-expand-line))
+           line-list))))
+
+
+;;; 调用w3m库
+(autoload 'w3m "w3m" "interface for w3m on emacs" t)
+(setq w3m-command-arguments '("-cookie" "-F"))
+(setq w3m-use-cookies t)
+(setq w3m-home-page "http://www.google.com")
+(require 'mime-w3m)
+(setq w3m-default-display-inline-image t)
+(setq w3m-default-toggle-inline-images t)
+
+(defun open-web ()
+  (interactive)
+  (w3m "www.google.com")
+  (evil-normal-state)
+)
+
+(global-set-key (kbd "C-x C-w") 'open-web)
+
+
+(defun copy-line (&optional arg)
+  "Do a kill-line but copy rather than kill.  This function directly calls
+	kill-line, so see documentation of kill-line for how to use it including prefix
+	argument and relevant variables.  This function works by temporarily making the
+	buffer read-only."
+  (interactive "P")
+  (let ((buffer-read-only t)
+		(kill-read-only-ok t))
+	(kill-line arg)))
+;; optional key binding
+(global-set-key (kbd "C-x y") 'clipboard-kill-ring-save)
+(global-set-key (kbd "C-x p") 'clipboard-yank)
+(global-set-key (kbd "C-l") 'helm-buffers-list)
+
+(define-key w3m-mode-map (kbd "<backspace>") 'w3m-view-previous-page)
+(define-key w3m-mode-map (kbd "<enter>") 'w3m-view-this-url)
+(define-key eww-mode-map (kbd "<backspace>") 'eww-back-url)
+

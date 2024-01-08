@@ -54,7 +54,7 @@
   (vterm-toggle)
   (switch-to-buffer "*vterm*")
   (evil-insert-state)
-  (delete-other-windows-vertically)
+  ; (delete-other-windows-vertically)
   )
 
 (global-set-key (kbd "<C-up>") 'shrink-window)
@@ -108,10 +108,9 @@ nil " st" nil
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(case-fold-search nil)
- ;; '(cscope-close-window-after-select t)
  '(initial-buffer-choice 'recentf-open-files)
  '(package-selected-packages
-   '(comment-dwim-2 sr-speedbar ethan-wspace color-theme-approximate multi-vterm vterm-toggle company-ctags session pod-mode org-drill org notmuch muttrc-mode mutt-alias mu4e initsplit htmlize helm-org graphviz-dot-mode folding eproject diminish csv-mode color-theme-modern browse-kill-ring boxquote bm bar-cursor apache-mode tabbar recently markdown-preview-mode helm-fuzzy-find helm-cscope helm-company eyebrowse evil ace-window))
+   '(helm-google helm-fish-completion helm-codesearch helm-bufler all-ext mutt-mode comment-dwim-2 sr-speedbar ethan-wspace color-theme-approximate multi-vterm vterm-toggle company-ctags session pod-mode org-drill org notmuch muttrc-mode mutt-alias mu4e initsplit htmlize helm-org graphviz-dot-mode folding eproject diminish csv-mode color-theme-modern browse-kill-ring boxquote bm bar-cursor apache-mode tabbar recently markdown-preview-mode helm-fuzzy-find helm-cscope helm-company eyebrowse evil ace-window))
  '(ring-bell-function 'ignore)
  '(speedbar-default-position 'left)
  '(tab-width 4)
@@ -186,9 +185,15 @@ nil " st" nil
 ;; optional key binding
 (global-set-key (kbd "C-x y") 'clipboard-kill-ring-save)
 (global-set-key (kbd "C-x p") 'clipboard-yank)
-(global-set-key (kbd "C-l") 'helm-buffers-list)
+(global-set-key (kbd "C-x l") 'helm-buffers-list)
+(global-set-key (kbd "C-x m") 'set-mark-command)
+(global-set-key (kbd "C-x w") 'ace-window)
 
 (define-key w3m-mode-map (kbd "<backspace>") 'w3m-view-previous-page)
 (define-key w3m-mode-map (kbd "<enter>") 'w3m-view-this-url)
-(define-key eww-mode-map (kbd "<backspace>") 'eww-back-url)
+
+(add-to-list 'auto-mode-alist  '("\\.org\\'" . org-mode))
+(setq truncate-lines nil)
+
+
 

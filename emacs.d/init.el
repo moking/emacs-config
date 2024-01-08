@@ -22,7 +22,6 @@
 (setq recentf-max-menu-items 25)
 (setq recentf-max-saved-items 25)
 
-(global-set-key (kbd "M-x") 'helm-M-x)
 
 (require 'company)
 (require 'company-ctags)
@@ -201,5 +200,4 @@ nil " st" nil
 (add-to-list 'auto-mode-alist  '("\\.org\\'" . org-mode))
 (setq truncate-lines nil)
 
-
-
+(global-set-key (kbd "M-x") 'helm-M-x)

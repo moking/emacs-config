@@ -1,12 +1,13 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(package-initialize)
 
 (add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0")
 (require 'color-theme)
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
-     (color-theme-aalto-light)))
+	 ))
 
 (setq scroll-conservatively 101)
 
@@ -19,32 +20,29 @@
 (setq recentf-max-menu-items 25)
 (setq recentf-max-saved-items 25)
 
-(global-set-key (kbd "M-x") 'helm-M-x)
+;(global-set-key (kbd "M-x") 'helm-M-x)
 
-(require 'company)
-(with-eval-after-load 'company
-  (company-ctags-auto-setup))
+;(require 'company)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; (with-eval-after-load 'company ;
+;   (company-ctags-auto-setup))	 ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (cscope-minor-mode 1)
 (helm-cscope-mode 1)
-(global-company-mode 1)
+;(global-company-mode 1)
 
-(add-hook 'c-mode-common-hook 'company-mode)
+(add-hook 'c-mode-common-hook 'auto-complete-mode)
 (add-hook 'c-mode-common-hook 'cscope-minor-mode)
 (add-hook 'c-mode-common-hook 'helm-cscope-mode)
 (add-hook 'c-mode-common-hook 'which-function-mode)
 (add-hook 'c-mode-common-hook 'hs-minor-mode)
-(add-hook 'after-init-hook 'global-company-mode)
-
-(setq tabbar-buffer-groups-function
-	  (lambda ()
-		(list "All")))
+;(add-hook 'after-init-hook 'global-company-mode)
 
 (add-to-list 'load-path "~/.emacs.d/evil")
 (require 'evil)
 (evil-mode 1)
-(tabbar-mode 1)
 (tool-bar-mode 0)
 (auto-fill-mode 1)
 (scroll-bar-mode 0)
@@ -53,8 +51,8 @@
   (interactive)
   (vterm-toggle)
   (switch-to-buffer "*vterm*")
+  (delete-other-windows)
   (evil-insert-state)
-  ; (delete-other-windows-vertically)
   )
 
 (global-set-key (kbd "<C-up>") 'shrink-window)
@@ -108,11 +106,17 @@ nil " st" nil
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(case-fold-search nil)
+ '(cscope-close-window-after-select t)
+ '(custom-enabled-themes '(pok-wog xp))
+ '(custom-safe-themes
+   '("b5cff93c3c6ed12d09ce827231b0f5d4925cfda018c9dcf93a2517ce3739e7f1" "e624f013e266f41148aa2e445a4b8681b0afb346a9126993e345309c9a829535" "0615f6940c6c5e5638c9157644263889db755d43576c25f7b311806f4cfe2c3a" "6cf0e8d082a890e94e4423fc9e222beefdbacee6210602524b7c84d207a5dfb5" "dbcaaf13f0d62b577dedefe6e1a9ae3e57ac86f316fea6ae83341db916fcb9c7" "8310462f5008fe10661e27ceab164e05c509343641cc262134fc623422b5999d" "317a45f190eaa3ccf8af6168aa89112d9cb794f87f409bc7a0638edee20d07fd" "8e5f723fc78532cfe9d76fd804dcd05ed5ea1eeea65507e25723b9e5934b1cbd" "5f4dfda04fbf7fd55228266c8aab73953d3087cea7fd06dd7f8ff1e4a497c739" "4ca84f9861113f889d505b66c4a9c30b81400f450b54f4c857d3eb44c5bdc601" "32b75b124f7f84517d3803a13a807189bae717b9d28e68e5a327a8ba55b7a6ee" "c2bce71b37ffd6e95fbd3b98d6eaadd113ec308f85149cfc8f50dee716764fed" "5516001c13a43f1f5be2d7df8035445f8d7c73179f637e40c1503afb184d98f2" "d9c957b0e8d2d7f1bbb781fc729e06598017ade2d0c18611e5abbdde0f65d981" "1319bfcf42cefb12fad274e5763d0eae0d0401cddc9738bdf220fe89447e9292" "39a854967792547c704cbff8ad4f97429f77dfcf7b3b4d2a62679ecd34b608da" "10551f0a24d0ac97a109f02178e9e34b448ee12a52357911cf3362a6b249cae6" "9df3ad3ca8a700784a2fbcfcdaca5da3b6149da52212f22d3a10f48da88581c3" "34c1b320a9d35318ca01660d533eee299d538f5a0c505c076511493b0a4f093d" "294c4b6a955149c93945f901a284140df29963a57939e9ed2fc4ad79b3605080" "ff8be9ed2696bf7bc999423d909a603cb23a9525bb43135c0d256b0b9377c958" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "499c3dd62c262b0bbb3ea0f5c83e92db5eac4a2a58468b51900e0ca706a7ad12" "46f6f73fb47a2a19b6ee1a49781f835fd73a185674268d4e048acf6feac9c55d" "7de92d9e450585f9f435f2d9b265f34218cb235541c3d0d42c154bbbfe44d4dd" "57db540d6a8cc20d2e2f20bd63dc3af4eb9e4bbfa7252a0ee877c99b577996c4" "0f302165235625ca5a827ac2f963c102a635f27879637d9021c04d845a32c568" "047ec205dcb5edbb94b35800110150a6e41e6cc92c0ccfb2ed25ac3df94331a6" "6ad45ae62cb64d84c6febbe85e3da7b3e68e65383e1a333578cabe5398d3109a" "20ad8133a73088c0ce4f26d106c3e70cae4e10c7e613c9b9e17a962eb194a24f" "e6e07c74bee845f48da5f46843a241d71d4ee3bf945fb506c05a08e5c872df3e" "aad7fd3672aad03901bf91e338cd530b87efc2162697a6bef79d7f8281fd97e3" "09feeb867d1ca5c1a33050d857ad6a5d62ad888f4b9136ec42002d6cdf310235" "69ecb7a75a0a8440df4b9ffe28b46dadf849b499c7e10680c26b99a84df773ca" "57d7e8b7b7e0a22dc07357f0c30d18b33ffcbb7bcd9013ab2c9f70748cfa4838" "a0d9281cf41e8a226f0539a7f54e4812fdeaaec36c751b84671df97a54013465" "9dc64d345811d74b5cd0dac92e5717e1016573417b23811b2c37bb985da41da2" "f831c1716ebc909abe3c851569a402782b01074e665a4c140e3e52214f7504a0" "d1527d35673f958d370d23096a266888771d68f5942be5377796d79ab2c9792f" "654b365467a92ff70c70f4926974e07dcdb34805d2787c51710b467e695342e6" "9939e735844cb24144d29ddf03fadf86a2d455758afeeee30372258e8a6401bb" "3d9df5511048d0815b1ccc2204cc739117c1a458be92fb26c03451149a1b1c11" "67b11ee5d10f1b5f7638035d1a38f77bca5797b5f5b21d16a20b5f0452cbeb46" "6e03b7f86fcca5ce4e63cda5cd0da592973e30b5c5edf198eddf51db7a12b832" "ef92efb0f9178b4a1130ffae1571d71983d123f84acd6565e09cb58ca71982c9" "39f0ac86b012062fed46469cc5ea1b00aa534db587ad21d55a9717a1bac99a27" "4c8372c68b3eab14516b6ab8233de2f9e0ecac01aaa859e547f902d27310c0c3" "3fe4861111710e42230627f38ebb8f966391eadefb8b809f4bfb8340a4e85529" "58ef0d9d877d9b1c19183f4215de272fa2938744f077e3a69ea12b8b6e852155" "a4ef58c2fb31b065ad09fa3029adba5eb518e42ef104cf9acf7c409abf40ca55" "3f1dcd824a683e0ab194b3a1daac18a923eed4dba5269eecb050c718ab4d5a26" default))
  '(initial-buffer-choice 'recentf-open-files)
  '(package-selected-packages
-   '(helm-google helm-fish-completion helm-codesearch helm-bufler all-ext mutt-mode comment-dwim-2 sr-speedbar ethan-wspace color-theme-approximate multi-vterm vterm-toggle company-ctags session pod-mode org-drill org notmuch muttrc-mode mutt-alias mu4e initsplit htmlize helm-org graphviz-dot-mode folding eproject diminish csv-mode color-theme-modern browse-kill-ring boxquote bm bar-cursor apache-mode tabbar recently markdown-preview-mode helm-fuzzy-find helm-cscope helm-company eyebrowse evil ace-window))
+   '(projectile flycheck ## org-roam org-bullets markdown-ts-mode js3-mode company-irony enclose project-treemacs treemacs-evil auto-complete kakapo-mode git-command leerzeichen ivy-omni-org helm-file-preview helm-dired-recent-dirs ace-popup-menu vterm color-theme-sanityinc-solarized darcula-theme evil-visualstar evil-visual-replace pdfgrep pdf-tools highlight-indentation auto-highlight-symbol line-reminder helm-git git find-file-in-repository browse-at-remote helm-google helm-fish-completion helm-codesearch helm-bufler all-ext mutt-mode comment-dwim-2 sr-speedbar ethan-wspace multi-vterm vterm-toggle company-ctags session pod-mode org-drill org notmuch muttrc-mode mutt-alias mu4e initsplit htmlize helm-org graphviz-dot-mode folding eproject diminish csv-mode browse-kill-ring boxquote bm bar-cursor apache-mode tabbar recently markdown-preview-mode helm-fuzzy-find helm-cscope helm-company eyebrowse evil ace-window))
  '(ring-bell-function 'ignore)
  '(speedbar-default-position 'left)
+ '(tab-bar-close-button-show nil)
+ '(tab-bar-mode t)
  '(tab-width 4)
  '(tool-bar-mode nil))
 (custom-set-faces
@@ -120,7 +124,12 @@ nil " st" nil
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Lucida Console" :foundry "B&H " :slant normal :weight regular :height 113 :width semi-condensed)))))
+ '(default ((t (:family "Lucida Console" :foundry "B&H " :slant normal :weight regular :height 143 :width semi-condensed))))
+ '(cscope-file-face ((t (:foreground "blue"))))
+ '(cscope-function-face ((t (:foreground "dark red"))))
+ '(git-gutter:modified ((t (:foreground "forest green" :weight bold))))
+ '(tabbar-button ((t (:box (:line-width (1 . 1) :color "dark gray" :style released-button) :inherit tabbar-default))))
+ '(w3m-image ((t (:foreground "green")))))
 
 (defun sb/expand-tags ()
 
@@ -195,5 +204,195 @@ nil " st" nil
 (add-to-list 'auto-mode-alist  '("\\.org\\'" . org-mode))
 (setq truncate-lines nil)
 
+(global-evil-visualstar-mode t)
+
+(global-set-key (kbd "C-=") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+(visual-line-mode t)
+
+(global-set-key (kbd "<f6>") 'leerzeichen-mode)
+
+(defun my-tabbar-buffer-groups ()
+  (list (cond ((string-equal "*" (substring (buffer-name) 0 1)) "emacs")
+              ((eq major-mode 'dired-mode) "emacs")
+              (t "user"))))
+(setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
+
+(tab-bar-mode 0)
+(tabbar-mode 1)
+
+(require 'kakapo-mode)
+(add-hook 'text-mode-hook 'kakapo-mode)
+(add-hook 'prog-mode-hook 'kakapo-mode)
+
+;;(global-auto-complete-mode 1)
+(enclose-global-mode 1)
+
+;; == irony-mode ==
+(use-package irony
+  :ensure t
+  :defer t
+  :init
+  (add-hook 'c++-mode-hook 'irony-mode)
+  (add-hook 'c-mode-hook 'irony-mode)
+  (add-hook 'objc-mode-hook 'irony-mode)
+  :config
+  ;; replace the `completion-at-point' and `complete-symbol' bindings in
+  ;; irony-mode's buffers by irony-mode's function
+  (defun my-irony-mode-hook ()
+    (define-key irony-mode-map [remap completion-at-point]
+      'irony-completion-at-point-async)
+    (define-key irony-mode-map [remap complete-symbol]
+      'irony-completion-at-point-async))
+  (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+  )
+
+;; == company-mode ==
+(use-package company
+  :ensure t
+  :defer t
+  :init (add-hook 'after-init-hook 'global-company-mode)
+  :config
+  (use-package company-irony :ensure t :defer t)
+  (setq company-idle-delay              nil
+	company-minimum-prefix-length   2
+	company-show-numbers            t
+	company-tooltip-limit           20
+	company-dabbrev-downcase        nil
+	company-backends                '((company-irony company-gtags))
+	)
+  :bind ("C-;" . company-complete-common)
+  )
+
+(defun go-click (button)
+  (print (button-get button 'point))
+  (let ((win (get-buffer-window (button-get button 'buffer)))
+        (cur-win (get-buffer-window (current-buffer))))
+    (select-window cur-win)
+    (if win
+        (progn
+          (select-window win)
+          (goto-char (button-get button 'point)))
+      (message "open a window with the location"))))
+
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+
+;; Load Org Mode
+(require 'org)
+
+;; Set Org directory for your notes
+(setq org-directory "~/vimwiki/org/")
+
+;; Set default file for capturing quick notes
+(setq org-default-notes-file (concat org-directory "notes.org"))
+
+;; Enable visual line mode for better text wrapping
+(add-hook 'org-mode-hook 'visual-line-mode)
+
+;; Customize TODO keywords
+(setq org-todo-keywords
+      '((sequence "TODO" "IN-PROGRESS" "|" "DONE" "CANCELLED")))
+
+;; Enable checkbox lists
+(setq org-enable-checkbox-support t)
+
+;; Capture templates
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "~/vimwiki/org/todo.org" "Tasks")
+         "* TODO %?\n  %i\n")
+        ("n" "Note" entry (file+headline "~/vimwiki/org/notes.org" "Notes")
+         "* %?\nEntered on %U\n  %i\n  %a")))
+
+;; Keybinding for org-capture
+(global-set-key (kbd "C-c c") 'org-capture)
+
+;; Org agenda configuration
+(setq org-agenda-files '("~/vimwiki/org/todo.org" "~/vimwiki/org/notes.org"))
+
+;; Keybinding for opening the agenda view
+(global-set-key (kbd "C-c a") 'org-agenda)
+
+;; Hide leading stars for a cleaner look
+(setq org-hide-leading-stars t)
+
+;; Install and configure org-bullets for prettier bullets
+(use-package org-bullets
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
+;; (use-package org-roam
+;;   :ensure t
+;;   :init
+;;   (setq org-roam-directory "~/vimwiki/org/roam")
+;;   :config
+;;   (org-roam-setup))
+
+;; Keybindings for Org-roam
+(global-set-key (kbd "C-c n l") 'org-roam-buffer-toggle)
+(global-set-key (kbd "C-c n f") 'org-roam-node-find)
+(global-set-key (kbd "C-c n i") 'org-roam-node-insert)
+(global-set-key (kbd "C-c n c") 'org-roam-capture)
 
 
+;; Define keybindings only in Org mode
+(define-key org-mode-map (kbd "C-c l") 'org-insert-link)
+(define-key org-mode-map (kbd "C-c t") 'org-todo)
+(define-key org-mode-map (kbd "C-c h") 'org-insert-heading)
+(define-key org-mode-map (kbd "C-c i") 'org-insert-item)
+
+
+(setq ispell-program-name "aspell")  ;; Or use "hunspell"
+(setq ispell-dictionary "en_US")     ;; Set your preferred dictionary
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (projectile-mode 1)))
+
+(setq projectile-project-search-path '("~/vimwiki/org")) 
+
+(server-start)
+
+(autoload 'post-mode "post" "mode for e-mail" t)
+(add-to-list 'auto-mode-alist 
+             '("\\.*mutt-*\\|.article\\|\\.followup" 
+                . post-mode))
+(add-hook 'post-mode-hook 
+  (lambda()
+    (auto-fill-mode t)    
+    (setq fill-column 72)    ; rfc 1855 for usenet messages
+    (require 'footnote-mode) 
+    (footmode-mode t)
+    (require 'boxquote)))
+
+(defun djcb-term-start-or-switch (prg &optional use-existing)
+  "* run program PRG in a terminal buffer. If USE-EXISTING is non-nil "
+  " and PRG is already running, switch to that buffer instead of starting"
+  " a new instance."
+  (interactive)
+  (let ((bufname (concat "*" prg "*")))
+    (when (not (and use-existing
+                 (let ((buf (get-buffer bufname)))
+                   (and buf (buffer-name (switch-to-buffer bufname))))))
+      (ansi-term prg prg))))
+
+(defmacro djcb-program-shortcut (name key &optional use-existing)
+  "* macro to create a key binding KEY to start some terminal program PRG; 
+    if USE-EXISTING is true, try to switch to an existing buffer"
+  `(global-set-key ,key 
+     '(lambda()
+        (interactive)
+        (djcb-term-start-or-switch ,name ,use-existing))))
+
+;; terminal programs are under Shift + Function Key
+(djcb-program-shortcut "bash"   (kbd "<S-f1>") t)  ; the ubershell
+(djcb-program-shortcut "mutt"  (kbd "<S-f2>") t)  ; mail client
+(djcb-program-shortcut "slrn"  (kbd "<S-f3>") t)  ; nttp client
+(djcb-program-shortcut "htop"  (kbd "<S-f4>") t)  ; my processes
+(djcb-program-shortcut "mc"    (kbd "<S-f5>") t)  ; midnight commander
+(djcb-program-shortcut "raggle"(kbd "<S-f6>") t)  ; rss feed reader
+(djcb-program-shortcut "irssi" (kbd "<S-f7>") t)  ; irc client

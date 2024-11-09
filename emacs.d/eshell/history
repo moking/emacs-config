@@ -1,0 +1,18 @@
+mutt
+rcopy 
+rcopy -f /tmp/tpp.diff ../ 
+git status 
+git apply ../tpp.diff
+git diff 
+exit
+git status 
+git diff 
+git add .
+git commit -m "add tpp idea in do_numa_page" 
+cd ..
+cd ..
+git add .
+git commit -m "add tpp idea in do_numa_page" 
+git status 
+git log
+exit

@@ -1,0 +1,1 @@
+("~/vimwiki/" "~/git/emacs-config/")
